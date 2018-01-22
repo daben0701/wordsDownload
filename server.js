@@ -12,7 +12,7 @@ const http = fr.http;
 let word = "";
 
 function getWord() {
-    for (let i = 2; i <= 10; i++) {
+    for (let i = 4; i <= 4; i++) {
         switch (i) {
             case 2:
                 word2();
@@ -45,22 +45,128 @@ function getWord() {
     }
 }
 
-
 const testWord = async function (word) {
-    var re = await http.get("http://baicizhan.qiniucdn.com/word_audios/" + word + ".mp3", (res, cb) => {
+    var re = await http.get("http://baicizhan.qiniucdn.com/word_audios/" + word + ".mp3", async (res, cb) => {
         if (res.statusCode !== 404) {
             let saveMedia = fs.createWriteStream('./dist/' + word + '.mp3');
-            res.pipe(saveMedia);
+            var save = await res.pipe(saveMedia);
             saveMedia.on('finish', () => {
                 console.log(word + "  finish");
             });
         } else {
             console.log(word + "  not a word!");
         }
-
     });
 
     return re;
+}
+
+const increse = function (wordArray){
+    switch(wordArray.length){
+        case 4:
+            if (wordArray[3] === 'z') {
+                if (wordArray[2] === 'z') {
+                    if (wordArray[1] === 'z') {
+                        if (wordArray[0] === 'z') {
+                            return;
+                        }
+                    } else {
+                        let val3 = 'a'.charCodeAt(), val2 = 'a'.charCodeAt(), val1 = wordArray[1].charCodeAt();
+                        wordArray[1] = wordArray[2].fromCharCode(val2 + 1);
+                        wordArray[2] = String.fromCharCode(val2);
+                        wordArray[3] = String.fromCharCode(val3);
+                    }
+                } else {
+                    let val3 = 'a'.charCodeAt(), val2 = wordArray[2].charCodeAt();
+                    wordArray[2] = wordArray[2].fromCharCode(val2 + 1);
+                    wordArray[3] = String.fromCharCode(val3);
+                }
+            } else {
+                let val3 = wordArray[3].charCodeAt();
+                wordArray[3] = String.fromCharCode(val3 + 1);
+            }
+            testWord4(wordArray.join(''));
+    }
+}
+
+const testWord4 = function (word) {
+    let wordArray = word.split('');
+    http.get("http://baicizhan.qiniucdn.com/word_audios/" + word + ".mp3", (res, cb) => {
+        if (res.statusCode !== 404) {
+            let saveMedia = fs.createWriteStream('./dist/' + word + '.mp3');
+            var save = res.pipe(saveMedia);
+            saveMedia.on('finish', () => {
+                console.log(word + "  finish");
+                increse(wordArray);
+            });
+        } else {
+            console.log(word + "  not a word!");
+            increse(wordArray);
+        }
+    });
+}
+
+const testWord5 = function (word) {
+    let wordArray = word.split('');
+    http.get("http://baicizhan.qiniucdn.com/word_audios/" + word + ".mp3", (res, cb) => {
+        if (res.statusCode !== 404) {
+            let saveMedia = fs.createWriteStream('./dist/' + word + '.mp3');
+            var save = res.pipe(saveMedia);
+            saveMedia.on('finish', () => {
+                console.log(word + "  finish");
+                if (wordArray[4] === 'z') {
+                    if (wordArray[3] === 'z') {
+                        if (wordArray[2] === 'z') {
+                            if (wordArray[1] === 'z') {
+                                if (wordArray[0] === 'z') {
+                                    return;
+                                }
+                            } else {
+                                let val3 = 'a'.charCodeAt(), val2 = 'a'.charCodeAt(), val1 = wordArray[1].charCodeAt();
+                                wordArray[1] = wordArray[2].fromCharCode(val2 + 1);
+                                wordArray[2] = String.fromCharCode(val2);
+                                wordArray[3] = String.fromCharCode(val3);
+                            }
+                        } else {
+                            let val3 = 'a'.charCodeAt(), val2 = wordArray[2].charCodeAt();
+                            wordArray[2] = wordArray[2].fromCharCode(val2 + 1);
+                            wordArray[3] = String.fromCharCode(val3);
+                        }
+                    } else {
+                        let val3 = wordArray[3].charCodeAt();
+                        wordArray[3] = String.fromCharCode(val3 + 1);
+                    }
+                    testWord(wordArray.join(''));
+                }
+            });
+        } else {
+            console.log(word + "  not a word!");
+            wordArray = word.split('');
+            if (wordArray[3] === 'z') {
+                if (wordArray[2] === 'z') {
+                    if (wordArray[1] === 'z') {
+                        if (wordArray[0] === 'z') {
+                            return;
+                        }
+                    } else {
+                        let val3 = 'a'.charCodeAt(), val2 = 'a'.charCodeAt(), val1 = wordArray[1].charCodeAt();
+                        wordArray[1] = String.fromCharCode(val1 + 1);
+                        wordArray[2] = String.fromCharCode(val2);
+                        wordArray[3] = String.fromCharCode(val3);
+                    }
+                } else {
+                    let val3 = 'a'.charCodeAt(), val2 = wordArray[2].charCodeAt();
+                    wordArray[2] = String.fromCharCode(val2 + 1);
+                    wordArray[3] = String.fromCharCode(val3);
+                }
+            } else {
+                let val3 = wordArray[3].charCodeAt();
+                wordArray[3] = String.fromCharCode(val3 + 1);
+            }
+            testWord(wordArray.join(''));
+        }
+        
+    });
 }
 
 const word2 = function () {
@@ -91,25 +197,11 @@ const word3 = function () {
 }
 
 const word4 = function () {
-    let a = new Array(5).join('a').split(''),
-        b = 'a'.charCodeAt(), c = 'a'.charCodeAt(), d = 'a'.charCodeAt(),
-        e = 'a'.charCodeAt();
-    for (let i = 0; i < 26; i++) {
-        a[0] = String.fromCharCode(b + i);
-        for (let j = 0; j < 26; j++) {
-            a[1] = String.fromCharCode(c + j);
-            for (let k = 0; k < 26; k++) {
-                a[2] = String.fromCharCode(d + k);
-                for (let l = 0; l < 26; l++) {
-                    a[3] = String.fromCharCode(e + l);
-                    testWord(a.join(''));
-                }
-            }
-        }
-    }
+    testWord4("aaaa");
 }
 
 const word5 = function () {
+    testWord4("aaaaa");
     let a = new Array(6).join('a').split(''),
         b = 'a'.charCodeAt(), c = 'a'.charCodeAt(), d = 'a'.charCodeAt(),
         e = 'a'.charCodeAt(), f = 'a'.charCodeAt();
