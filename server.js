@@ -45,20 +45,21 @@ function getWord() {
     }
 }
 
-const testWord = async function (word) {
-    var re = await http.get("http://baicizhan.qiniucdn.com/word_audios/" + word + ".mp3", async (res, cb) => {
+const testWord = function (word) {
+    let wordArray = word.split('');
+    http.get("http://baicizhan.qiniucdn.com/word_audios/" + word + ".mp3", (res, cb) => {
         if (res.statusCode !== 404) {
             let saveMedia = fs.createWriteStream('./dist/' + word + '.mp3');
-            var save = await res.pipe(saveMedia);
+            var save = res.pipe(saveMedia);
             saveMedia.on('finish', () => {
                 console.log(word + "  finish");
+                increse(wordArray);
             });
         } else {
             console.log(word + "  not a word!");
+            increse(wordArray);
         }
     });
-
-    return re;
 }
 
 const increse = function (wordArray) {
@@ -445,23 +446,6 @@ const increse = function (wordArray) {
             testWord(wordArray.join(''));
             break;
     }
-}
-
-const testWord = function (word) {
-    let wordArray = word.split('');
-    http.get("http://baicizhan.qiniucdn.com/word_audios/" + word + ".mp3", (res, cb) => {
-        if (res.statusCode !== 404) {
-            let saveMedia = fs.createWriteStream('./dist/' + word + '.mp3');
-            var save = res.pipe(saveMedia);
-            saveMedia.on('finish', () => {
-                console.log(word + "  finish");
-                increse(wordArray);
-            });
-        } else {
-            console.log(word + "  not a word!");
-            increse(wordArray);
-        }
-    });
 }
 
 const word2 = function () {
