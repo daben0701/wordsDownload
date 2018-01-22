@@ -72,13 +72,13 @@ const increse = function (wordArray){
                         }
                     } else {
                         let val3 = 'a'.charCodeAt(), val2 = 'a'.charCodeAt(), val1 = wordArray[1].charCodeAt();
-                        wordArray[1] = wordArray[2].fromCharCode(val2 + 1);
+                        wordArray[1] = String.fromCharCode(val1 + 1);
                         wordArray[2] = String.fromCharCode(val2);
                         wordArray[3] = String.fromCharCode(val3);
                     }
                 } else {
                     let val3 = 'a'.charCodeAt(), val2 = wordArray[2].charCodeAt();
-                    wordArray[2] = wordArray[2].fromCharCode(val2 + 1);
+                    wordArray[2] = String.fromCharCode(val2 + 1);
                     wordArray[3] = String.fromCharCode(val3);
                 }
             } else {
