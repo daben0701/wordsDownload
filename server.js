@@ -107,66 +107,7 @@ const testWord4 = function (word) {
 }
 
 const testWord5 = function (word) {
-    let wordArray = word.split('');
-    http.get("http://baicizhan.qiniucdn.com/word_audios/" + word + ".mp3", (res, cb) => {
-        if (res.statusCode !== 404) {
-            let saveMedia = fs.createWriteStream('./dist/' + word + '.mp3');
-            var save = res.pipe(saveMedia);
-            saveMedia.on('finish', () => {
-                console.log(word + "  finish");
-                if (wordArray[4] === 'z') {
-                    if (wordArray[3] === 'z') {
-                        if (wordArray[2] === 'z') {
-                            if (wordArray[1] === 'z') {
-                                if (wordArray[0] === 'z') {
-                                    return;
-                                }
-                            } else {
-                                let val3 = 'a'.charCodeAt(), val2 = 'a'.charCodeAt(), val1 = wordArray[1].charCodeAt();
-                                wordArray[1] = String.fromCharCode(val1 + 1);
-                                wordArray[2] = String.fromCharCode(val2);
-                                wordArray[3] = String.fromCharCode(val3);
-                            }
-                        } else {
-                            let val3 = 'a'.charCodeAt(), val2 = wordArray[2].charCodeAt();
-                            wordArray[2] = String.fromCharCode(val2 + 1);
-                            wordArray[3] = String.fromCharCode(val3);
-                        }
-                    } else {
-                        let val3 = wordArray[3].charCodeAt();
-                        wordArray[3] = String.fromCharCode(val3 + 1);
-                    }
-                    testWord(wordArray.join(''));
-                }
-            });
-        } else {
-            console.log(word + "  not a word!");
-            wordArray = word.split('');
-            if (wordArray[3] === 'z') {
-                if (wordArray[2] === 'z') {
-                    if (wordArray[1] === 'z') {
-                        if (wordArray[0] === 'z') {
-                            return;
-                        }
-                    } else {
-                        let val3 = 'a'.charCodeAt(), val2 = 'a'.charCodeAt(), val1 = wordArray[1].charCodeAt();
-                        wordArray[1] = String.fromCharCode(val1 + 1);
-                        wordArray[2] = String.fromCharCode(val2);
-                        wordArray[3] = String.fromCharCode(val3);
-                    }
-                } else {
-                    let val3 = 'a'.charCodeAt(), val2 = wordArray[2].charCodeAt();
-                    wordArray[2] = String.fromCharCode(val2 + 1);
-                    wordArray[3] = String.fromCharCode(val3);
-                }
-            } else {
-                let val3 = wordArray[3].charCodeAt();
-                wordArray[3] = String.fromCharCode(val3 + 1);
-            }
-            testWord(wordArray.join(''));
-        }
-        
-    });
+    
 }
 
 const word2 = function () {
