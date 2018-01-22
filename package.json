@@ -1,0 +1,36 @@
+{
+  "name": "graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "graphql": "^0.12.3",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.3.0",
+    "koa-static": "^4.0.2",
+    "mocha": "^5.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-latest-node": "^0.4.0",
+    "download": "^6.2.5",
+    "follow-redirects": "^1.4.0",
+    "fs": "^0.0.1-security",
+    "graphql-server-koa": "^1.3.2",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.1",
+    "path": "^0.12.7",
+    "sequelize": "^4.31.2",
+    "sinon": "^4.1.6",
+    "sinon-chai": "^2.14.0"
+  }
+}
