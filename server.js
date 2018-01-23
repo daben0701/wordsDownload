@@ -12,6 +12,57 @@ const http = fr.http;
 
 let word = "", downloadInterval4, downloadInterval5, downloadInterval6, downloadInterval7, downloadInterval8, downloadInterval9, downloadInterval10;
 
+
+const word4 = function () {
+    // testWord("aaaa");
+    word = "blnd";
+    downloadInterval4 = setInterval(() => {
+        increse();
+    }, 60);
+}
+
+const word5 = function () {
+    word = "abaaa";
+    downloadInterval5 = setInterval(() => {
+        increse();
+    }, 60);
+}
+
+const word6 = function () {
+    word = "abaaaa";
+    downloadInterval6 = setInterval(() => {
+        increse();
+    }, 60);
+}
+
+const word7 = function () {
+    word = "abaaaaa";
+    downloadInterval7 = setInterval(() => {
+        increse();
+    }, 60);
+}
+
+const word8 = function () {
+    word = "abaaaaaa";
+    downloadInterval8 = setInterval(() => {
+        increse();
+    }, 60);
+}
+
+const word9 = function () {
+    word = "abaaaaaaa";
+    downloadInterval8 = setInterval(() => {
+        increse();
+    }, 60);
+}
+
+const word10 = function () {
+    word = "abaaaaaaaa";
+    downloadInterval8 = setInterval(() => {
+        increse();
+    }, 60);
+}
+
 function getWord() {
     for (let i = 4; i <= 4; i++) {
         switch (i) {
@@ -543,56 +594,6 @@ const word3 = function () {
             }
         }
     }
-}
-
-const word4 = function () {
-    // testWord("aaaa");
-    word = "blnd";
-    downloadInterval4 = setInterval(() => {
-        increse();
-    }, 60);
-}
-
-const word5 = function () {
-    word = "aaaaa";
-    downloadInterval5 = setInterval(() => {
-        increse();
-    }, 60);
-}
-
-const word6 = function () {
-    word = "aaaaaa";
-    downloadInterval6 = setInterval(() => {
-        increse();
-    }, 60);
-}
-
-const word7 = function () {
-    word = "aaaaaaa";
-    downloadInterval7 = setInterval(() => {
-        increse();
-    }, 60);
-}
-
-const word8 = function () {
-    word = "aaaaaaaa";
-    downloadInterval8 = setInterval(() => {
-        increse();
-    }, 60);
-}
-
-const word9 = function () {
-    word = "aaaaaaaaa";
-    downloadInterval8 = setInterval(() => {
-        increse();
-    }, 60);
-}
-
-const word10 = function () {
-    word = "aaaaaaaaaa";
-    downloadInterval8 = setInterval(() => {
-        increse();
-    }, 60);
 }
 
 getWord();
