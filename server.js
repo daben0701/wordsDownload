@@ -6,13 +6,14 @@ import graphqlRouter from './router';
 import download from 'download';
 import fr from 'follow-redirects';
 import fs from 'fs';
+import { setInterval } from 'timers';
 
 const http = fr.http;
 
-let word = "";
+let word = "", downloadInterval4, downloadInterval5, downloadInterval6, downloadInterval7, downloadInterval8, downloadInterval9, downloadInterval10;
 
 function getWord() {
-    for (let i = 5; i <= 10; i++) {
+    for (let i = 4; i <= 4; i++) {
         switch (i) {
             case 2:
                 word2();
@@ -46,31 +47,37 @@ function getWord() {
 }
 
 const testWord = function (word) {
-    let wordArray = word.split('');
     http.get("http://baicizhan.qiniucdn.com/word_audios/" + word + ".mp3", (res, cb) => {
-        if (res.statusCode !== 404) {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
             let saveMedia = fs.createWriteStream('./dist/' + word + '.mp3');
             var save = res.pipe(saveMedia);
             saveMedia.on('finish', () => {
                 console.log(word + "  finish");
-                increse(wordArray);
             });
         } else {
             console.log(word + "  not a word!");
-            increse(wordArray);
         }
     });
 }
 
-const increse = function (wordArray) {
+const increse = function () {
     let val = 'a'.charCodeAt();
+    let wordArray = word.split("");
+    testWord(word);
     switch (wordArray.length) {
         case 4:
             if (wordArray[3] === 'z') {
                 if (wordArray[2] === 'z') {
                     if (wordArray[1] === 'z') {
                         if (wordArray[0] === 'z') {
+                            clearInterval(downloadInterval4);
                             return;
+                        }else{
+                            let val0 = wordArray[0].charCodeAt();
+                            wordArray[0] = String.fromCharCode(val0 + 1);
+                            wordArray[1] = String.fromCharCode(val);
+                            wordArray[2] = String.fromCharCode(val);
+                            wordArray[3] = String.fromCharCode(val);
                         }
                     } else {
                         let val1 = wordArray[1].charCodeAt();
@@ -87,7 +94,7 @@ const increse = function (wordArray) {
                 let val3 = wordArray[3].charCodeAt();
                 wordArray[3] = String.fromCharCode(val3 + 1);
             }
-            testWord(wordArray.join(''));
+            word = wordArray.join('');
             break;
         case 5:
             if (wordArray[4] === 'z') {
@@ -95,7 +102,15 @@ const increse = function (wordArray) {
                     if (wordArray[2] === 'z') {
                         if (wordArray[1] === 'z') {
                             if (wordArray[0] === 'z') {
+                                clearInterval(downloadInterval5);
                                 return;
+                            }else{
+                                let val0 = wordArray[0].charCodeAt();
+                                wordArray[0] = String.fromCharCode(val0 + 1);
+                                wordArray[1] = String.fromCharCode(val);
+                                wordArray[2] = String.fromCharCode(val);
+                                wordArray[3] = String.fromCharCode(val);
+                                wordArray[4] = String.fromCharCode(val);
                             }
                         } else {
                             let val1 = wordArray[1].charCodeAt();
@@ -120,7 +135,7 @@ const increse = function (wordArray) {
                 let val4 = wordArray[4].charCodeAt();
                 wordArray[4] = String.fromCharCode(val4 + 1);
             }
-            testWord(wordArray.join(''));
+            word = wordArray.join('');
             break;
         case 6:
             if (wordArray[5] === 'z') {
@@ -129,7 +144,16 @@ const increse = function (wordArray) {
                         if (wordArray[2] === 'z') {
                             if (wordArray[1] === 'z') {
                                 if (wordArray[0] === 'z') {
+                                    clearInterval(downloadInterval6);
                                     return;
+                                }else{
+                                    let val0 = wordArray[0].charCodeAt();
+                                    wordArray[0] = String.fromCharCode(val0 + 1);
+                                    wordArray[1] = String.fromCharCode(val);
+                                    wordArray[2] = String.fromCharCode(val);
+                                    wordArray[3] = String.fromCharCode(val);
+                                    wordArray[4] = String.fromCharCode(val);
+                                    wordArray[5] = String.fromCharCode(val);
                                 }
                             } else {
                                 let val1 = wordArray[1].charCodeAt();
@@ -162,7 +186,7 @@ const increse = function (wordArray) {
                 let val5 = wordArray[5].charCodeAt();
                 wordArray[5] = String.fromCharCode(val5 + 1);
             }
-            testWord(wordArray.join(''));
+            word = wordArray.join('');
             break;
         case 7:
             if (wordArray[6] === 'z') {
@@ -172,7 +196,17 @@ const increse = function (wordArray) {
                             if (wordArray[2] === 'z') {
                                 if (wordArray[1] === 'z') {
                                     if (wordArray[0] === 'z') {
+                                        clearInterval(downloadInterval7);
                                         return;
+                                    }else{
+                                        let val0 = wordArray[0].charCodeAt();
+                                        wordArray[0] = String.fromCharCode(val0 + 1);
+                                        wordArray[1] = String.fromCharCode(val);
+                                        wordArray[2] = String.fromCharCode(val);
+                                        wordArray[3] = String.fromCharCode(val);
+                                        wordArray[4] = String.fromCharCode(val);
+                                        wordArray[5] = String.fromCharCode(val);
+                                        wordArray[6] = String.fromCharCode(val);
                                     }
                                 } else {
                                     let val1 = wordArray[1].charCodeAt();
@@ -214,7 +248,7 @@ const increse = function (wordArray) {
                 let val6 = wordArray[6].charCodeAt();
                 wordArray[6] = String.fromCharCode(val6 + 1);
             }
-            testWord(wordArray.join(''));
+            word = wordArray.join('');
             break;
         case 8:
             if (wordArray[7] === 'z') {
@@ -225,7 +259,18 @@ const increse = function (wordArray) {
                                 if (wordArray[2] === 'z') {
                                     if (wordArray[1] === 'z') {
                                         if (wordArray[0] === 'z') {
+                                            clearInterval(downloadInterval8);
                                             return;
+                                        }else{
+                                            let val0 = wordArray[0].charCodeAt();
+                                            wordArray[0] = String.fromCharCode(val0 + 1);
+                                            wordArray[1] = String.fromCharCode(val);
+                                            wordArray[2] = String.fromCharCode(val);
+                                            wordArray[3] = String.fromCharCode(val);
+                                            wordArray[4] = String.fromCharCode(val);
+                                            wordArray[5] = String.fromCharCode(val);
+                                            wordArray[6] = String.fromCharCode(val);
+                                            wordArray[7] = String.fromCharCode(val);
                                         }
                                     } else {
                                         let val1 = wordArray[1].charCodeAt();
@@ -277,7 +322,7 @@ const increse = function (wordArray) {
                 let val7 = wordArray[7].charCodeAt();
                 wordArray[7] = String.fromCharCode(val7 + 1);
             }
-            testWord(wordArray.join(''));
+            word = wordArray.join('');
             break;
         case 9:
             if (wordArray[8] === 'z') {
@@ -289,7 +334,19 @@ const increse = function (wordArray) {
                                     if (wordArray[2] === 'z') {
                                         if (wordArray[1] === 'z') {
                                             if (wordArray[0] === 'z') {
+                                                clearInterval(downloadInterval9);
                                                 return;
+                                            }else{
+                                                let val0 = wordArray[0].charCodeAt();
+                                                wordArray[0] = String.fromCharCode(val0 + 1);
+                                                wordArray[1] = String.fromCharCode(val);
+                                                wordArray[2] = String.fromCharCode(val);
+                                                wordArray[3] = String.fromCharCode(val);
+                                                wordArray[4] = String.fromCharCode(val);
+                                                wordArray[5] = String.fromCharCode(val);
+                                                wordArray[6] = String.fromCharCode(val);
+                                                wordArray[7] = String.fromCharCode(val);
+                                                wordArray[8] = String.fromCharCode(val);
                                             }
                                         } else {
                                             let val1 = wordArray[1].charCodeAt();
@@ -353,7 +410,7 @@ const increse = function (wordArray) {
                 let val8 = wordArray[8].charCodeAt();
                 wordArray[8] = String.fromCharCode(val8 + 1);
             }
-            testWord(wordArray.join(''));
+            word = wordArray.join('');
             break;
         case 10:
             if (wordArray[9] === 'z') {
@@ -366,7 +423,20 @@ const increse = function (wordArray) {
                                         if (wordArray[2] === 'z') {
                                             if (wordArray[1] === 'z') {
                                                 if (wordArray[0] === 'z') {
+                                                    clearInterval(downloadInterval10);
                                                     return;
+                                                }else{
+                                                    let val0 = wordArray[0].charCodeAt();
+                                                    wordArray[0] = String.fromCharCode(val0 + 1);
+                                                    wordArray[1] = String.fromCharCode(val);
+                                                    wordArray[2] = String.fromCharCode(val);
+                                                    wordArray[3] = String.fromCharCode(val);
+                                                    wordArray[4] = String.fromCharCode(val);
+                                                    wordArray[5] = String.fromCharCode(val);
+                                                    wordArray[6] = String.fromCharCode(val);
+                                                    wordArray[7] = String.fromCharCode(val);
+                                                    wordArray[8] = String.fromCharCode(val);
+                                                    wordArray[9] = String.fromCharCode(val);
                                                 }
                                             } else {
                                                 let val1 = wordArray[1].charCodeAt();
@@ -443,7 +513,7 @@ const increse = function (wordArray) {
                 let val9 = wordArray[9].charCodeAt();
                 wordArray[9] = String.fromCharCode(val9 + 1);
             }
-            testWord(wordArray.join(''));
+            word = wordArray.join('');
             break;
     }
 }
@@ -476,31 +546,53 @@ const word3 = function () {
 }
 
 const word4 = function () {
-    testWord("aaaa");
+    // testWord("aaaa");
+    word = "blnd";
+    downloadInterval4 = setInterval(() => {
+        increse();
+    }, 60);
 }
 
 const word5 = function () {
-    testWord("aaaaa");
+    word = "aaaaa";
+    downloadInterval5 = setInterval(() => {
+        increse();
+    }, 60);
 }
 
 const word6 = function () {
-    testWord("aaaaaa");
+    word = "aaaaaa";
+    downloadInterval6 = setInterval(() => {
+        increse();
+    }, 60);
 }
 
 const word7 = function () {
-    testWord("aaaaaaa");
+    word = "aaaaaaa";
+    downloadInterval7 = setInterval(() => {
+        increse();
+    }, 60);
 }
 
 const word8 = function () {
-    testWord("aaaaaaaa");
+    word = "aaaaaaaa";
+    downloadInterval8 = setInterval(() => {
+        increse();
+    }, 60);
 }
 
 const word9 = function () {
-    testWord("aaaaaaaaa");
+    word = "aaaaaaaaa";
+    downloadInterval8 = setInterval(() => {
+        increse();
+    }, 60);
 }
 
 const word10 = function () {
-    testWord("aaaaaaaaaa");
+    word = "aaaaaaaaaa";
+    downloadInterval8 = setInterval(() => {
+        increse();
+    }, 60);
 }
 
 getWord();
