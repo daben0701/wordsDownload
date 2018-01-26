@@ -17,7 +17,7 @@ let index = 0, words = [];;
 const wordDownload = setInterval(() => {
     downloadInterval = setInterval(() => {
         increase();
-    }, 30);
+    }, 200);
 });
 
 const word4 = function () {
