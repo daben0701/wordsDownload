@@ -110,8 +110,8 @@ function getWord() {
         // console.log(line);
         if (line) {
             const word = line.split(' ')[0];
-            console.log(word);
-            words.push(word);
+            console.log(word.toLowerCase());
+            words.push(word.toLowerCase());
         } else {
             console.log("stop");
             console.log(words);
