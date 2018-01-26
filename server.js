@@ -141,6 +141,7 @@ const testWord = function (word) {
 const increase = function(){
     word = words[index++];
     testWord(word);
+    console.log(index);
     if(index > 100){
         clearInterval(downloadInterval);
     }
