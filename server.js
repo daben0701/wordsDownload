@@ -7,18 +7,25 @@ import download from 'download';
 import fr from 'follow-redirects';
 import fs from 'fs';
 import { setInterval } from 'timers';
+import byline from 'byline';
 
 const http = fr.http;
 
-let word = "", downloadInterval4, downloadInterval5, downloadInterval6, downloadInterval7, downloadInterval8, downloadInterval9, downloadInterval10;
+let word = "", downloadInterval, downloadInterval4, downloadInterval5, downloadInterval6, downloadInterval7, downloadInterval8, downloadInterval9, downloadInterval10;
+let index = 0, words = [];;
 
+const wordDownload = setInterval(() => {
+    downloadInterval = setInterval(() => {
+        increase();
+    }, 30);
+});
 
 const word4 = function () {
     // testWord("aaaa");
-    word = "blnd";
+    word = "zero";
     downloadInterval4 = setInterval(() => {
         increse();
-    }, 60);
+    }, 30);
 }
 
 const word5 = function () {
@@ -64,51 +71,76 @@ const word10 = function () {
 }
 
 function getWord() {
-    for (let i = 4; i <= 4; i++) {
-        switch (i) {
-            case 2:
-                word2();
-                break;
-            case 3:
-                word3();
-                break;
-            case 4:
-                word4();
-                break;
-            case 5:
-                word5();
-                break;
-            case 6:
-                word6();
-                break;
-            case 7:
-                word7();
-                break;
-            case 8:
-                word8();
-                break;
-            case 9:
-                word9();
-                break;
-            case 10:
-                word10();
-                break;
+    // for (let i = 4; i <= 4; i++) {
+    //     switch (i) {
+    //         case 2:
+    //             word2();
+    //             break;
+    //         case 3:
+    //             word3();
+    //             break;
+    //         case 4:
+    //             word4();
+    //             break;
+    //         case 5:
+    //             word5();
+    //             break;
+    //         case 6:
+    //             word6();
+    //             break;
+    //         case 7:
+    //             word7();
+    //             break;
+    //         case 8:
+    //             word8();
+    //             break;
+    //         case 9:
+    //             word9();
+    //             break;
+    //         case 10:
+    //             word10();
+    //             break;
+    //     }
+    // }
+    
+    var stream = fs.createReadStream('dict.txt', { encoding: 'utf8' });
+    stream = byline.createStream(stream);
+
+    stream.on('data', function (line) {
+        // console.log(line);
+        if (line) {
+            const word = line.split(' ')[0];
+            console.log(word);
+            words.push(word);
+        } else {
+            console.log("stop");
+            console.log(words);
+            wordDownload();
         }
-    }
+    });
 }
 
 const testWord = function (word) {
-    http.get("http://baicizhan.qiniucdn.com/word_audios/" + word + ".mp3", (res, cb) => {
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-            let saveMedia = fs.createWriteStream('./dist/' + word + '.mp3');
-            var save = res.pipe(saveMedia);
-            saveMedia.on('finish', () => {
-                console.log(word + "  finish");
-            });
-        } else {
-            console.log(word + "  not a word!");
-        }
-    });
+    try {
+        http.get("http://baicizhan.qiniucdn.com/word_audios/" + word + ".mp3", (res, cb) => {
+            if (res.statusCode >= 200 && res.statusCode < 300) {
+                let saveMedia = fs.createWriteStream('./dist/' + word + '.mp3');
+                var save = res.pipe(saveMedia);
+                saveMedia.on('finish', () => {
+                    console.log(word + "  finish");
+                });
+            } else {
+                console.log(word + "  not a word!");
+            }
+        });
+    } catch(e){
+        console.error('server.js error:--->', e);
+    }
+}
+
+const increase = function(){
+    word = words[index++];
+    testWord(word);
 }
 
 const increse = function () {
