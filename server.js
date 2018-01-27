@@ -14,11 +14,11 @@ const http = fr.http;
 let word = "", downloadInterval, downloadInterval4, downloadInterval5, downloadInterval6, downloadInterval7, downloadInterval8, downloadInterval9, downloadInterval10;
 let index = 0, words = [];;
 
-const wordDownload = setInterval(() => {
+const wordDownload = () => {
     downloadInterval = setInterval(() => {
         increase();
     }, 200);
-});
+};
 
 const word4 = function () {
     // testWord("aaaa");
