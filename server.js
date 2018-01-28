@@ -129,7 +129,7 @@ const testWord = function (word) {
                 saveMedia.on('finish', () => {
                     console.log(word + "  finish");
                 });
-            } else {
+            } else {   
                 console.log(word + "  not a word!");
             }
         });
